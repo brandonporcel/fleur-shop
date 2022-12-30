@@ -7,21 +7,6 @@ import { collection, getDocs } from 'firebase/firestore';
 import CarouselHome from '../components/CarouselHome.jsx';
 
 export default function Home() {
-	const [products, setProducts] = useState([]);
-	useEffect(() => {
-		(async () => {
-			const colRef = collection(db, 'products');
-			const snapshots = await getDocs(colRef);
-			const docs = snapshots.docs.map((doc) => {
-				const data = doc.data();
-				data.id = doc.id;
-				return data;
-			});
-			setProducts(docs);
-			console.log(docs);
-		})();
-	}, []);
-
 	return (
 		<>
 			<Head>
@@ -31,13 +16,6 @@ export default function Home() {
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
 			<CarouselHome />
-			{/* {products.map((product) => (
-				<div key={product.id}>
-					<Link href={`product/${product.id}`}>
-						<p>{product.nombre}</p>
-					</Link>
-				</div>
-			))} */}
 		</>
 	);
 }

@@ -8,7 +8,7 @@ export default function Header() {
 		<header>
 			<nav>
 				<div className="nav-ctn left">
-					<p>SHOP</p>
+					<p className="header-nav-item">SHOP</p>
 					<ThemeSwitcher />
 				</div>
 				<div className="nav-ctn center">
@@ -17,9 +17,10 @@ export default function Header() {
 					</Link>
 				</div>
 				<div className="nav-ctn right">
-					<Link href={'/login'}>Login</Link>
-
-					<p>cart(3)</p>
+					<Link href={'/login'} className="header-nav-item login-btn">
+						Login
+					</Link>
+					<button className="noBtnStyles header-cart-item">cart(3)</button>
 				</div>
 			</nav>
 		</header>
