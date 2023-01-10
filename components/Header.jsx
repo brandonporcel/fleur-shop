@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import React from 'react';
-import Logo from './Logo';
+import Logo from './icons/Logo';
 import ThemeSwitcher from './ThemeSwitcher';
 
 export default function Header() {

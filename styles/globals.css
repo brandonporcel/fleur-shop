@@ -2,8 +2,10 @@
 	font-family: 'Limerick-Serial-Heavy-Regular';
 	src: url(../public/fonts/limerick-serial-heavy-regular.ttf);
 }
+html {
+	scroll-behavior: smooth;
+}
 * {
-	padding: 0;
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
@@ -149,7 +151,12 @@ footer ul li:hover {
 	height: 360px;
 	position: relative;
 	width: 290px;
-	margin-bottom: 25px;
+	margin-bottom: 30px;
+	/* margin-bottom: 10px; */
+	opacity: 0;
+	filter: blur(5px);
+	transform: translateX(-100%);
+	transition: opacity 2s, transform 2s, filter 1s;
 }
 .product-card__image {
 	overflow: hidden;
@@ -214,4 +221,27 @@ footer ul li:hover {
 	width: 85%;
 	margin: 0 auto;
 	margin-top: 20px;
+}
+/*  */
+.totop {
+	position: fixed;
+	/* color: #617073; */
+	font-size: 35px;
+	bottom: 0;
+	right: 0;
+	margin: 10px;
+	cursor: pointer;
+	opacity: 0;
+	transition: opacity 0.8s;
+}
+.show {
+	opacity: 1;
+}
+/*  */
+.showIntersecting {
+	padding: 3px;
+	background-color: red;
+	opacity: 1;
+	filter: blur(0);
+	transform: translateX(0);
 }

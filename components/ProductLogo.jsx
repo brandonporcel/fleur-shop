@@ -3,7 +3,7 @@ import React from 'react';
 export default function ProductLogo() {
 	return (
 		<svg
-			class="icon icon--intl"
+			className="icon icon--intl"
 			style={{ enableBackground: 'new 0 0 36.1 24.7' }}
 		>
 			<g>

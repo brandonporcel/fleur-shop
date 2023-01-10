@@ -1,7 +1,7 @@
 export default function Logo({ color }) {
 	return (
 		<svg
-			class="icon icon--wide site-logo"
+			className="icon icon--wide site-logo"
 			xmlns="http://www.w3.org/2000/svg"
 			viewBox="0 0 729.6 123.8"
 			fill={color}

@@ -1,10 +1,10 @@
 import Head from 'next/head';
 
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
 import db from '../firebase/config.js';
 import { collection, getDocs } from 'firebase/firestore';
 import CarouselHome from '../components/CarouselHome.jsx';
+import ToTop from '../components/ToTop.jsx';
 
 export default function Home() {
 	return (
@@ -16,6 +16,7 @@ export default function Home() {
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
 			<CarouselHome />
+			<ToTop />
 		</>
 	);
 }
