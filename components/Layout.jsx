@@ -3,6 +3,7 @@ import ThemeSwitcher from './ThemeSwitcher';
 import Newsletter from '../components/Newsletter.jsx';
 import Header from './Header';
 import Footer from './Footer';
+import ToTop from './ToTop';
 
 export default function Layout({ children, monedas }) {
 	return (
@@ -22,6 +23,7 @@ export default function Layout({ children, monedas }) {
 				/>
 			</Head>
 			<Newsletter />
+			<ToTop />
 			<Header />
 
 			{children}

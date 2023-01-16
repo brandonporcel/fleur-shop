@@ -1,11 +1,13 @@
 import { useState, useEffect } from 'react';
 
 export default () => {
-	const [theme, setTheme] = useState('dark');
+	const [theme, setTheme] = useState(null);
 
+	let t1 = 'light',
+		t2 = 'dark';
 	function changeTheme(themee) {
 		localStorage.setItem('theme', themee);
-		if (themee === 'dark') {
+		if (themee === t2) {
 			document.documentElement.style.setProperty('--bg-color', '#1E1E1E');
 			document.documentElement.style.setProperty('--text-color', '#fff');
 			document.documentElement.style.setProperty('--bg-hover', '#00000066');
@@ -19,18 +21,24 @@ export default () => {
 
 	useEffect(() => {
 		const LSTheme = localStorage.getItem('theme');
-		LSTheme === null ? changeTheme(theme) : changeTheme(LSTheme);
+		LSTheme === null
+			? window.matchMedia('(prefers-color-scheme: light)').matches
+				? changeTheme(t1)
+				: changeTheme(t2)
+			: changeTheme(LSTheme);
 	}, []);
 
 	return (
-		<div>
-			<button onClick={() => changeTheme('light')} className="noBtnStyles">
-				<p className="header-nav-item">light</p>
-			</button>
-			<span style={{ userSelect: 'none' }}>/</span>
-			<button onClick={() => changeTheme('dark')} className="noBtnStyles">
-				<p className="header-nav-item">dark</p>
-			</button>
-		</div>
+		<>
+			{theme === t1 ? (
+				<button onClick={() => changeTheme(t2)} className="noBtnStyles">
+					<p className="header-nav-item">t/dark</p>
+				</button>
+			) : (
+				<button onClick={() => changeTheme(t1)} className="noBtnStyles">
+					<p className="header-nav-item">t/light</p>
+				</button>
+			)}
+		</>
 	);
 };

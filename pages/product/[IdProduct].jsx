@@ -59,14 +59,11 @@ export default function IdProduct({}) {
 		<main>
 			<div className="detail-wrapper">
 				{/* <b>{otrasMonedas}</b> */}
-				<h2>{data.nombre} </h2>
+				<h1>{data.name} </h1>
 				<div className="gallery-img-ctn">
-					<img
-						src="https://cdn.shopify.com/s/files/1/0587/8179/4470/products/GLF_NAIL_GNVBL-09_540x.jpg?v=1670391007"
-						alt=""
-						className="gallery-img"
-					/>
+					<img src={data.image} alt="" className="gallery-img" />
 				</div>
+
 				<p className="product-detail-desc">
 					Lorem ipsum, dolor sit amet consectetur adipisicing elit. Odit quaerat
 					nobis, molestiae, quas possimus quae quo distinctio ab minus culpa
@@ -75,7 +72,7 @@ export default function IdProduct({}) {
 				<h2>price: {data.price} </h2>
 				<h3>stock:_{data.stock} </h3>
 				<button onClick={comprar}>Comprar</button>
-				<h1>ComENTARIOS:</h1>
+				<h2>ComENTARIOS:</h2>
 				<form onSubmit={(e) => subir(e)}>
 					<input
 						type="text"

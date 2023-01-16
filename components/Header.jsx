@@ -1,14 +1,18 @@
 import Link from 'next/link';
-import React from 'react';
+import React, { useState } from 'react';
 import Logo from './icons/Logo';
+import ShopNav from './shopNav';
 import ThemeSwitcher from './ThemeSwitcher';
 
 export default function Header() {
+	const [shopNav, setShopNav] = useState(false);
 	return (
-		<header>
-			<nav>
+		<>
+			<header>
 				<div className="nav-ctn left">
-					<p className="header-nav-item">SHOP</p>
+					<p className="header-nav-item" onClick={() => setShopNav(!shopNav)}>
+						SHOP
+					</p>
 					<ThemeSwitcher />
 				</div>
 				<div className="nav-ctn center">
@@ -22,7 +26,8 @@ export default function Header() {
 					</Link>
 					<button className="noBtnStyles header-cart-item">cart(3)</button>
 				</div>
-			</nav>
-		</header>
+			</header>
+			<ShopNav visible={shopNav}></ShopNav>
+		</>
 	);
 }
