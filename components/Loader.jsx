@@ -1,5 +1,5 @@
 import React from 'react';
-import Arrow from './icons/arrow';
+import Arrow from './icons/Arrow';
 
 export default function Loader() {
 	return (

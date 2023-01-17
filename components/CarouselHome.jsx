@@ -10,7 +10,7 @@ export default function CarouselHome() {
 	};
 	useEffect(() => {
 		Container.current.addEventListener('wheel', (e) => e.preventDefault(), {
-			passive: true,
+			passive: false,
 		});
 	}, []);
 
