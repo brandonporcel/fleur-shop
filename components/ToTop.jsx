@@ -20,8 +20,7 @@ export default function ToTop() {
 			ref={toTopBtn}
 			onClick={() => window.scrollTo(0, 0)}
 		>
-			{/* <Arrow direction={'up'} color={'var(--text-color)'} /> */}
-			<Arrow direction={'up'} color={'var(--text-color)'} />
+			<Arrow color={'var(--text-color)'}></Arrow>
 		</button>
 	);
 }

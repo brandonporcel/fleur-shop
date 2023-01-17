@@ -1,11 +1,6 @@
-import React from 'react';
-
 export default function ProductLogo() {
 	return (
-		<svg
-			className="icon icon--intl"
-			style={{ enableBackground: 'new 0 0 36.1 24.7' }}
-		>
+		<svg className="icon icon--intl" style={{ fill: 'var(--text-color)' }}>
 			<g>
 				<path
 					d="M36,6.9c-0.4-1-1.4-1.6-3-1.9l0.5-1.1c-0.9,0.7-2.3,1.3-3.4,1.7c1.1,0.5,2.4,1.2,3.2,2L33,6.5c0.9,0.2,1.5,0.5,1.6,0.9

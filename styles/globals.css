@@ -33,7 +33,9 @@ a {
 ul {
 	list-style: none;
 }
-img {
+img,
+svg,
+video {
 	max-width: 100%;
 	height: auto;
 }
@@ -103,8 +105,13 @@ header {
 .carousel-products-ctn {
 	display: flex;
 	overflow-x: auto;
+	-ms-overflow-style: none; /* Internet Explorer 10+ */
+	scrollbar-width: none; /* Firefox */
 }
 
+.carousel-products-ctn::-webkit-scrollbar {
+	display: none; /* Safari and Chrome */
+}
 .carousel-product {
 	padding-left: 25px;
 	min-width: 35%;
@@ -178,6 +185,7 @@ footer ul li:hover {
 	font-weight: 900;
 	transition: color 0.2s ease-in-out;
 	text-align: center;
+	text-transform: capitalize;
 }
 .product-card-icon {
 	opacity: 0;
@@ -235,7 +243,13 @@ footer ul li:hover {
 	cursor: pointer;
 	opacity: 0;
 	transition: opacity 0.8s;
+	background: none;
+	border: none;
+	transform: rotate(325deg);
+	width: 41px;
+	height: 41px;
 }
+
 .show {
 	opacity: 1;
 }
@@ -261,4 +275,20 @@ footer ul li:hover {
 }
 .shop-nav-container ul li a:hover {
 	text-decoration: underline;
+}
+/*  */
+.loader {
+	width: 34px;
+	height: 34px;
+	animation: rotation 1s infinite linear;
+	margin: 0 auto;
+}
+
+@keyframes rotation {
+	from {
+		transform: rotate(0deg);
+	}
+	to {
+		transform: rotate(359deg);
+	}
 }

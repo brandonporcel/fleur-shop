@@ -2,11 +2,12 @@ import { useEffect, useState } from 'react';
 import { doc, getDoc, setDoc, onSnapshot } from 'firebase/firestore';
 import db from '../firebase/config.js';
 export const useFetch = (IdProduct) => {
-	console.log(IdProduct, 'asdasdas');
+	const [loader, setLoader] = useState([]);
 	const [data, setData] = useState([]);
 
 	useEffect(() => {
 		const getData = async (IdProduct) => {
+			setLoader(true);
 			try {
 				if (!IdProduct) return false;
 				const docRef = doc(db, 'products', IdProduct);
@@ -17,11 +18,13 @@ export const useFetch = (IdProduct) => {
 				setData(data);
 			} catch (err) {
 				console.log(err);
+			} finally {
+				setLoader(false);
 			}
 		};
 
 		getData(IdProduct);
 	}, [IdProduct]);
 
-	return [data];
+	return [data, loader];
 };

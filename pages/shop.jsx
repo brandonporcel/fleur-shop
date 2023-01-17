@@ -6,6 +6,8 @@ import db from '../firebase/config.js';
 import ProductLogo from '../components/ProductLogo.jsx';
 import ToTop from '../components/ToTop.jsx';
 
+import Loader from '../components/Loader.jsx';
+
 export default function Shop() {
 	const [loading, setLoading] = useState(false);
 
@@ -63,10 +65,9 @@ export default function Shop() {
 	}, [productsObserver]);
 	return (
 		<section className="products-wrapper">
-			{console.log(products, 'hgola')}
 			<div className="products-ctnn">
 				{loading ? (
-					<p>loadinggg</p>
+					<Loader />
 				) : (
 					products.map((product) => (
 						<Link
