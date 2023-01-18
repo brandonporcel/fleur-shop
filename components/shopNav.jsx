@@ -13,7 +13,7 @@ export default function ShopNav({ visible }) {
 						<Link href={'/collection/tops'}>tops</Link>
 					</li>
 					<li>
-						<Link href={'/collection/bottom'}>bottom</Link>
+						<Link href={'/collection/bottoms'}>bottoms</Link>
 					</li>
 					<li>
 						<Link href={'/shop'}>all</Link>

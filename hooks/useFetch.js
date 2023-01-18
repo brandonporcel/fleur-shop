@@ -1,7 +1,15 @@
 import { useEffect, useState } from 'react';
-import { doc, getDoc, setDoc, onSnapshot } from 'firebase/firestore';
+import {
+	doc,
+	getDoc,
+	setDoc,
+	onSnapshot,
+	query,
+	where,
+	collection,
+} from 'firebase/firestore';
 import db from '../firebase/config.js';
-export const useFetch = (IdProduct) => {
+export const useFetch = (IdProduct, type) => {
 	const [loader, setLoader] = useState([]);
 	const [data, setData] = useState([]);
 
@@ -12,9 +20,7 @@ export const useFetch = (IdProduct) => {
 				if (!IdProduct) return false;
 				const docRef = doc(db, 'products', IdProduct);
 				const docSnap = await getDoc(docRef);
-
 				const data = docSnap.data();
-
 				setData(data);
 			} catch (err) {
 				console.log(err);

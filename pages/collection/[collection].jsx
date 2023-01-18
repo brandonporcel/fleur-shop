@@ -1,5 +1,5 @@
-import React from 'react';
+import ProductsLayout from '../../components/ProductsLayout';
 
 export default function Collection() {
-	return <div>Collection</div>;
+	return <ProductsLayout queryy={true}></ProductsLayout>;
 }
