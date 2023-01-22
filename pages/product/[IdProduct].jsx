@@ -31,7 +31,8 @@ export default function IdProduct({}) {
 		},
 		{
 			name: 'SIZE GUIDE',
-			content: data.details,
+			content:
+				'Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure hic maiores sed delectus sit quia vitae ipsam natus aperiam impedit, eaque nesciunt a accusantium assumenda quae dolorum reiciendis vel! Illum. hola asdlaosdosa sd dd d dsa hola asdlaosdosa sd dd d dsa hola asdlaosdosa sd dd d dsa hola asdlaosdosa sd dd d dsa',
 		},
 	];
 	return (

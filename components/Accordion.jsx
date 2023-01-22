@@ -1,9 +1,15 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import accordion from '../styles/Accordion.module.css';
 
 export default function Accordion({ items }) {
 	const [active, setActive] = useState();
 	const handleClick = (name) => setActive(name === active ? null : name);
+
+	const [elementClick, setElementClick] = useState(null);
+	useEffect(
+		() => setElementClick(document.getElementById(active)?.clientHeight),
+		[active]
+	);
 
 	return (
 		<div className={accordion.container}>
@@ -17,7 +23,6 @@ export default function Accordion({ items }) {
 						>
 							{item.name}
 							<p
-								className={accordion.headerIcon}
 								style={{
 									transform: `rotate(${isActive ? '-180deg' : '0deg)'}`,
 									transition: 'all 0.2s',
@@ -30,7 +35,7 @@ export default function Accordion({ items }) {
 						<div
 							className={accordion.content}
 							style={{
-								height: `${isActive ? 100 : 0}px`,
+								height: isActive ? `${elementClick}px` : '0px',
 							}}
 						>
 							<div className={accordion.inner} id={item.name}>
