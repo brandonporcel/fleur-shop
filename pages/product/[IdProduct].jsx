@@ -1,15 +1,20 @@
-import React, { useEffect, useState } from 'react';
+import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { useFetch } from '../../hooks/useFetch';
 
 import Loader from '../../components/Loader';
-
-import Head from 'next/head';
+import { useContext } from 'react';
+import CartContext from '../../context/CartContext';
+import Accordion from '../../components/Accordion';
+import ButtonStyled from '../../components/Button';
 
 export default function IdProduct({}) {
+	const { addToCart } = useContext(CartContext);
+
 	const router = useRouter();
 	const { IdProduct } = router.query;
 	const [data, loader] = useFetch(IdProduct);
+
 	const capitalizeEachWord = (sentence) => {
 		const arr = typeof sentence === 'string' && sentence.split(' ');
 		for (var i = 0; i < arr.length; i++) {
@@ -19,6 +24,16 @@ export default function IdProduct({}) {
 		return str2;
 	};
 
+	let accordionItems = [
+		{
+			name: 'DETAILS',
+			content: data.details,
+		},
+		{
+			name: 'SIZE GUIDE',
+			content: data.details,
+		},
+	];
 	return (
 		<>
 			<Head>
@@ -29,31 +44,26 @@ export default function IdProduct({}) {
 					{loader ? (
 						<Loader></Loader>
 					) : (
-						<>
-							<h1>{data.name} </h1>
+						<div className="detail-ctn">
+							<h3 className="det-prod-title">{data.name} </h3>
 							<div className="gallery-img-ctn">
 								<img src={data.image} alt="" className="gallery-img" />
 							</div>
-							<p className="product-detail-desc">
-								Lorem ipsum, dolor sit amet consectetur adipisicing elit. Odit
-								quaerat nobis, molestiae, quas possimus quae quo distinctio ab
-								minus culpa maiores facilis. Quas aspernatur eum error numquam
-								suscipit ut eos!
+							<p className="product-detail-desc">{data.description}</p>
+							<p className="small">
+								{data.stock < 15 && `*Only ${data.stock} In Stock*`}
 							</p>
-							<h2>price: {data.price} </h2>
-							<h3>stock:_{data.stock} </h3>
-							<button>Comprar</button>
-							<h2>ComENTARIOS:</h2>
-							<form onSubmit={(e) => subir(e)}>
-								<input
-									type="text"
-									name="text"
-
-									// onChange={change}
-								/>
-								<button>subit</button>
-							</form>
-						</>
+							<Accordion items={accordionItems}></Accordion>
+							<p className="detail-price">
+								{new Intl.NumberFormat('es-AR', {
+									style: 'currency',
+									currency: 'ARS',
+								}).format(parseFloat(data.price).toFixed(2))}
+							</p>
+							<ButtonStyled type="bg" onClick={() => addToCart(data)}>
+								Add To Cart
+							</ButtonStyled>
+						</div>
 					)}
 				</div>
 			</main>

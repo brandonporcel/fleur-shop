@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import Loader from './Loader';
 import db from '../firebase/config.js';
 import {
@@ -10,8 +10,11 @@ import {
 } from 'firebase/firestore';
 import ProductLogo from './ProductLogo';
 import Link from 'next/link';
+import CartContext from '../context/CartContext';
 
 export default function ProductsLayout({ children, queryy }) {
+	const { cart, addToCart, deleteFromCart, getAllProducts } =
+		useContext(CartContext);
 	const [loading, setLoading] = useState(false);
 
 	const router = useRouter();
@@ -40,6 +43,7 @@ export default function ProductsLayout({ children, queryy }) {
 				});
 				setProducts(docs);
 				setLoading(false);
+				// getAllProducts(docs);
 			} catch (error) {
 				console.log(error);
 			} finally {
