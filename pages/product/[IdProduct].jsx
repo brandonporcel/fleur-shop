@@ -1,45 +1,91 @@
 import Head from 'next/head';
+import { useContext, useEffect } from 'react';
 import { useRouter } from 'next/router';
+
 import { useFetch } from '../../hooks/useFetch';
 
 import Loader from '../../components/Loader';
-import { useContext } from 'react';
 import CartContext from '../../context/CartContext';
 import Accordion from '../../components/Accordion';
 import ButtonStyled from '../../components/Button';
 
+import { Splide, SplideSlide } from '@splidejs/react-splide';
+import '@splidejs/react-splide/css';
+import Slider from '../../styles/Slider.Splide.module.css';
+
+import { capitalizeEachWord, formatPrice } from '../../helpers/helpers';
+
 export default function IdProduct({}) {
-	const { addToCart } = useContext(CartContext);
+	const { addToCart, setCartVisible, getSpecificProdData, cartVisible } =
+		useContext(CartContext);
 
 	const router = useRouter();
 	const { IdProduct } = router.query;
 	const [data, loader] = useFetch(IdProduct);
-
-	const capitalizeEachWord = (sentence) => {
-		const arr = typeof sentence === 'string' && sentence.split(' ');
-		for (var i = 0; i < arr.length; i++) {
-			arr[i] = arr[i].charAt(0).toUpperCase() + arr[i].slice(1);
-		}
-		const str2 = typeof sentence === 'string' && arr.join(' ');
-		return str2;
-	};
+	const { img_slider } = data;
 
 	let accordionItems = [
 		{
 			name: 'DETAILS',
 			content: data.details,
 		},
-		{
-			name: 'SIZE GUIDE',
-			content:
-				'Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure hic maiores sed delectus sit quia vitae ipsam natus aperiam impedit, eaque nesciunt a accusantium assumenda quae dolorum reiciendis vel! Illum. hola asdlaosdosa sd dd d dsa hola asdlaosdosa sd dd d dsa hola asdlaosdosa sd dd d dsa hola asdlaosdosa sd dd d dsa',
-		},
 	];
+	data.sizeGuide &&
+		accordionItems.push({
+			name: 'Size Guide',
+			content: (
+				<table>
+					<thead>
+						<tr>
+							<th>SIZE</th>
+							<th>XS</th>
+							<th>S</th>
+							<th>M</th>
+							<th>L</th>
+							<th>XL</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>Length</td>
+							<td>24"</td>
+							<td>24.5"</td>
+							<td>25"</td>
+							<td>26"</td>
+							<td>26.5"</td>
+						</tr>
+						<tr>
+							<td>Chest </td>
+							<td>20"</td>
+							<td>20.5"</td>
+							<td>21"</td>
+							<td>22"</td>
+							<td>22.5"</td>
+						</tr>
+						<tr>
+							<td>Sleeve</td>
+							<td>25"</td>
+							<td>25.5"</td>
+							<td>26"</td>
+							<td>26.5"</td>
+							<td>27"</td>
+						</tr>
+					</tbody>
+				</table>
+			),
+		});
+
+	const addToCartYOpenCart = () => {
+		setCartVisible(true);
+		addToCart(data);
+	};
+
 	return (
 		<>
 			<Head>
 				<title>{capitalizeEachWord(data.name)}</title>
 			</Head>
+
 			<main>
 				<div className="detail-wrapper">
 					{loader ? (
@@ -47,23 +93,35 @@ export default function IdProduct({}) {
 					) : (
 						<div className="detail-ctn">
 							<h3 className="det-prod-title">{data.name} </h3>
-							<div className="gallery-img-ctn">
-								<img src={data.image} alt="" className="gallery-img" />
-							</div>
+							<Splide
+								aria-labelledby="My Favorite Images"
+								className={Slider.carouselWrapper}
+								options={{
+									arrows: false,
+								}}
+							>
+								{img_slider?.map(({ url, alt }, i) => (
+									<SplideSlide key={i}>
+										<img src={url} alt={alt} />
+									</SplideSlide>
+								))}
+							</Splide>
 							<p className="product-detail-desc">{data.description}</p>
 							<p className="small">
 								{data.stock < 15 && `*Only ${data.stock} In Stock*`}
 							</p>
 							<Accordion items={accordionItems}></Accordion>
-							<p className="detail-price">
-								{new Intl.NumberFormat('es-AR', {
-									style: 'currency',
-									currency: 'ARS',
-								}).format(parseFloat(data.price).toFixed(2))}
-							</p>
-							<ButtonStyled type="bg" onClick={() => addToCart(data)}>
-								Add To Cart
-							</ButtonStyled>
+							<h4 className="detail-price">{formatPrice(data.price)}</h4>
+
+							{data.stock > getSpecificProdData(data.id) ? (
+								<ButtonStyled type="bg" onClick={addToCartYOpenCart}>
+									Add To Cart
+								</ButtonStyled>
+							) : (
+								<ButtonStyled type="bg">
+									you've added all the stock to the cart
+								</ButtonStyled>
+							)}
 						</div>
 					)}
 				</div>

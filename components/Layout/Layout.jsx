@@ -1,8 +1,8 @@
 import Head from 'next/head';
-import Newsletter from '../components/Newsletter.jsx';
+import Newsletter from './Newsletter.jsx';
 import Header from './Header';
 import Footer from './Footer';
-import ToTop from './ToTop';
+import ToTop from '../ToTop';
 
 export default function Layout({ children }) {
 	return (

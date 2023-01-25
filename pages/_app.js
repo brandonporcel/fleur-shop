@@ -1,7 +1,7 @@
 import '../styles/globals.css';
 import { SessionProvider } from 'next-auth/react';
-import Layout from '../components/Layout';
-import {CartProvider} from '../context/CartContext';
+import Layout from '../components/Layout/Layout';
+import { CartProvider } from '../context/CartContext';
 
 export default function App({ Component, pageProps, session }) {
 	return (

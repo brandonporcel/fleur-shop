@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@next/font": "13.0.7",
+    "@splidejs/react-splide": "^0.7.12",
     "firebase": "^9.15.0",
     "next": "13.0.7",
     "next-auth": "^4.18.6",

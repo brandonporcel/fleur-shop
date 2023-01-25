@@ -16,7 +16,7 @@ export default function Accordion({ items }) {
 			{items.map((item, i) => {
 				let isActive = active === item.name;
 				return (
-					<div key={i}>
+					<React.Fragment key={i}>
 						<div
 							className={accordion.header}
 							onClick={() => handleClick(item.name)}
@@ -42,7 +42,7 @@ export default function Accordion({ items }) {
 								{item.content}
 							</div>
 						</div>
-					</div>
+					</React.Fragment>
 				);
 			})}
 		</div>

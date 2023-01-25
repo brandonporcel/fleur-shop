@@ -10,11 +10,8 @@ import {
 } from 'firebase/firestore';
 import ProductLogo from './ProductLogo';
 import Link from 'next/link';
-import CartContext from '../context/CartContext';
 
 export default function ProductsLayout({ children, queryy }) {
-	const { cart, addToCart, deleteFromCart, getAllProducts } =
-		useContext(CartContext);
 	const [loading, setLoading] = useState(false);
 
 	const router = useRouter();
@@ -24,6 +21,7 @@ export default function ProductsLayout({ children, queryy }) {
 
 	const productRef = useRef();
 	const [productsObserver, setProductsObserver] = useState(null);
+
 	// calling api
 	useEffect(() => {
 		if (!router.isReady) return;
@@ -43,7 +41,6 @@ export default function ProductsLayout({ children, queryy }) {
 				});
 				setProducts(docs);
 				setLoading(false);
-				// getAllProducts(docs);
 			} catch (error) {
 				console.log(error);
 			} finally {
@@ -53,23 +50,19 @@ export default function ProductsLayout({ children, queryy }) {
 			}
 		})();
 	}, [router.isReady, collection]);
+
 	// observer effect
 	useEffect(() => {
 		if (productsObserver !== null) {
 			const options = {
-				threshold: 0.3,
+				threshold: 0.15,
 			};
 			const detectIntersection = (entries) => {
 				entries.forEach((el) => {
 					if (el.isIntersecting) {
 						el.target.classList.add('showIntersecting');
-						// productRef.current.classList.add('showIntersecting');
-					} else {
-						if (el.target.classList.contains('showIntersecting')) {
-							el.target.classList.remove('showIntersecting');
-							// if (productRef.current.classList.contains('showIntersecting')) {
-							// productRef.current.classList.remove('showIntersecting');
-						}
+					} else if (el.target.classList.contains('showIntersecting')) {
+						el.target.classList.remove('showIntersecting');
 					}
 				});
 			};
@@ -94,7 +87,7 @@ export default function ProductsLayout({ children, queryy }) {
 						>
 							<div className="product-card__image">
 								<img
-									src={product.image}
+									src={product.img_slider[0].url}
 									alt={product.name}
 									style={{ filter: loading && 'blur(2px)' }}
 								/>
