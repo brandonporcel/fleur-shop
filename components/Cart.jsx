@@ -39,7 +39,7 @@ export default function Cart({ visible }) {
 								key={el.id}
 								title={el.name}
 								quantity={el.quantity}
-								img={el.img_slider[0].url}
+								// img={el.img_slider[0].url}
 								id={el.id}
 								stock={el.stock}
 								price={el.price}
