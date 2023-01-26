@@ -89,9 +89,9 @@ export default function IdProduct({}) {
 
 	return (
 		<>
-			<Head>
+			{/* <Head>
 				<title>{capitalizeEachWord(data.name)}</title>
-			</Head>
+			</Head> */}
 
 			<main>
 				<div className="detail-wrapper">
