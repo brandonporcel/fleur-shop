@@ -36,7 +36,7 @@ const CartProvider = ({ children }) => {
 		setCart(() => cart.filter((el) => el.id !== id));
 	};
 	const finalPriceCart = () =>
-		cart.reduce((acc, prod) => acc + prod?.quantity * prod?.price, 0);
+		cart?.reduce((acc, prod) => acc + prod?.quantity * prod?.price, 0);
 	const buyProducts = () => {
 		alert('Thanks for your order!!');
 		setCartVisible(false);
