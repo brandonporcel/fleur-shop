@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import React from 'react';
-
+import { formatPrice } from '../helpers/helpers';
 export default function CartProduct({
 	title,
 	quantity,
@@ -22,6 +22,10 @@ export default function CartProduct({
 					<h5>{title}</h5>
 				</Link>
 				<div className="prod-cart-actions-ctn">
+					<button onClick={() => deleteOneFromCart(id)} className="cart-button">
+						-
+					</button>
+					<span className="prod-cart-quantity">{quantity}</span>
 					<button
 						onClick={() => addToCart({ id })}
 						className="cart-button"
@@ -29,11 +33,6 @@ export default function CartProduct({
 					>
 						+
 					</button>
-					<span className="prod-cart-quantity">{quantity}</span>
-					<button onClick={() => deleteOneFromCart(id)} className="cart-button">
-						-
-					</button>
-
 					<button
 						onClick={() => deleteAllFromCart(id)}
 						className="cart-button delete"
@@ -41,7 +40,9 @@ export default function CartProduct({
 						x
 					</button>
 				</div>
-				<h6 className="final-price-one-prod">${price * quantity}.00</h6>
+				<h6 className="final-price-one-prod">
+					{formatPrice(price * quantity)}
+				</h6>
 			</div>
 		</div>
 	);

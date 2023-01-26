@@ -108,7 +108,7 @@ export default function IdProduct({}) {
 							</Splide>
 							<p className="product-detail-desc">{data.description}</p>
 							<p className="small">
-								{data.stock < 15 && `*Only ${data.stock} In Stock*`}
+								{data.stock <= 15 && `*Only ${data.stock} In Stock*`}
 							</p>
 							<Accordion items={accordionItems}></Accordion>
 							<h4 className="detail-price">{formatPrice(data.price)}</h4>

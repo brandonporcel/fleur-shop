@@ -1,7 +1,10 @@
+import { useRouter } from 'next/router';
 import Link from 'next/link';
 import React from 'react';
 
 export default function ShopNav({ visible }) {
+	const router = useRouter();
+	const { collection } = router.query;
 	const sections = [
 		{
 			link: '/collection/accesories',
@@ -20,7 +23,7 @@ export default function ShopNav({ visible }) {
 		},
 		{
 			link: '/shop',
-			name: 'shop',
+			name: 'all',
 			id: 'd',
 		},
 	];
@@ -30,7 +33,15 @@ export default function ShopNav({ visible }) {
 				<ul>
 					{sections.map((el) => (
 						<li key={el.id}>
-							<Link href={`${el.link}`}>{el.name}</Link>
+							<Link
+								style={{
+									borderBottom:
+										collection === el.name && '1px solid var(--text-color)',
+								}}
+								href={`${el.link}`}
+							>
+								{el.name}
+							</Link>
 						</li>
 					))}
 				</ul>

@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import React, { useContext, useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Loader from './Loader';
 import db from '../firebase/config.js';
 import {
@@ -87,7 +87,8 @@ export default function ProductsLayout({ children, queryy }) {
 						>
 							<div className="product-card__image">
 								<img
-									src={product.img_slider[0].url}
+									// src={product.img_slider[0].url}
+									src={product.image}
 									alt={product.name}
 									style={{ filter: loading && 'blur(2px)' }}
 								/>
