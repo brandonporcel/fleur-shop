@@ -9,9 +9,9 @@ import CartContext from '../../context/CartContext';
 import Accordion from '../../components/Accordion';
 import ButtonStyled from '../../components/Button';
 
-import { Splide, SplideSlide } from '@splidejs/react-splide';
-import '@splidejs/react-splide/css';
-import Slider from '../../styles/Slider.Splide.module.css';
+// import { Splide, SplideSlide } from '@splidejs/react-splide';
+// import '@splidejs/react-splide/css';
+// import Slider from '../../styles/Slider.Splide.module.css';
 
 import { capitalizeEachWord, formatPrice } from '../../helpers/helpers';
 
@@ -23,6 +23,7 @@ export default function IdProduct({}) {
 	const { IdProduct } = router.query;
 	const [data, loader] = useFetch(IdProduct);
 	const { img_slider } = data;
+	console.log(img_slider === undefined ? [] : img_slider);
 	const imggSliderTest = [
 		{
 			url: 'sda',
@@ -100,7 +101,8 @@ export default function IdProduct({}) {
 					) : (
 						<div className="detail-ctn">
 							<h3 className="det-prod-title">{data.name} </h3>
-							<Splide
+
+							{/* <Splide
 								aria-labelledby="My Favorite Images"
 								className={Slider.carouselWrapper}
 								options={{
@@ -112,7 +114,7 @@ export default function IdProduct({}) {
 										<img src={url} alt={alt} />
 									</SplideSlide>
 								))}
-							</Splide>
+							</Splide> */}
 							<p className="product-detail-desc">{data.description}</p>
 							<p className="small">
 								{data.stock <= 15 && `*Only ${data.stock} In Stock*`}
