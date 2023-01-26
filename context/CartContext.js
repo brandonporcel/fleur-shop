@@ -9,7 +9,7 @@ const CartProvider = ({ children }) => {
 		const itemInCart = cart.some((prod) => prod.id === newProduct.id);
 		setCart(() => {
 			return itemInCart
-				? cart.map((el) =>
+				? cart?.map((el) =>
 						el.id === newProduct.id ? { ...el, quantity: el.quantity + 1 } : el
 				  )
 				: [...cart, { ...newProduct, quantity: 1 }];
@@ -20,7 +20,7 @@ const CartProvider = ({ children }) => {
 		const productToDelete = cart.find((el) => el.id === id);
 		setCart(() =>
 			productToDelete.quantity > 1
-				? cart.map((el) =>
+				? cart?.map((el) =>
 						el.id === id
 							? {
 									...el,

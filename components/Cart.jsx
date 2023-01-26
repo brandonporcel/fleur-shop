@@ -33,7 +33,7 @@ export default function Cart({ visible }) {
 				{cart?.length === 0 ? (
 					<span className="cart-empty">Your cart is currently empty.</span>
 				) : (
-					cart.map((el) => {
+					cart?.map((el) => {
 						return (
 							<CartProduct
 								key={el.id}

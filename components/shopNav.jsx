@@ -31,7 +31,7 @@ export default function ShopNav({ visible }) {
 		visible && (
 			<nav className="shop-nav-container">
 				<ul>
-					{sections.map((el) => (
+					{sections?.map((el) => (
 						<li key={el.id}>
 							<Link
 								style={{

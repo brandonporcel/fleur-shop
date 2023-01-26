@@ -34,7 +34,7 @@ export default function ProductsLayout({ children, queryy }) {
 					: dataBase;
 
 				const snapshots = await getDocs(colRef);
-				const docs = snapshots.docs.map((doc) => {
+				const docs = snapshots.docs?.map((doc) => {
 					const data = doc.data();
 					data.id = doc.id;
 					return data;
@@ -78,7 +78,7 @@ export default function ProductsLayout({ children, queryy }) {
 				{loading ? (
 					<Loader />
 				) : (
-					products.map((product) => (
+					products?.map((product) => (
 						<Link
 							href={`/product/${product.id}`}
 							className="product-card-ctn"

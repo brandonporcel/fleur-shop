@@ -49,7 +49,7 @@ export default function CarouselHome() {
 	return (
 		<main className="carousel-wrapper">
 			<div ref={Container} className="carousel-products-ctn" onWheel={scroll}>
-				{images.map(({ id, title, url }) => (
+				{images?.map(({ id, title, url }) => (
 					<Link href="/shop" key={id} className="carousel-product">
 						<img src={url} alt={title} />
 					</Link>
