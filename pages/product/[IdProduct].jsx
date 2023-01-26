@@ -23,7 +23,14 @@ export default function IdProduct({}) {
 	const { IdProduct } = router.query;
 	const [data, loader] = useFetch(IdProduct);
 	const { img_slider } = data;
-
+	const imggSliderTest = [
+		{
+			url: 'sda',
+		},
+		{
+			url: 'asd',
+		},
+	];
 	let accordionItems = [
 		{
 			name: 'DETAILS',
@@ -100,7 +107,7 @@ export default function IdProduct({}) {
 									arrows: false,
 								}}
 							>
-								{img_slider?.map(({ url, alt }, i) => (
+								{imggSliderTest?.map(({ url, alt }, i) => (
 									<SplideSlide key={i}>
 										<img src={url} alt={alt} />
 									</SplideSlide>
