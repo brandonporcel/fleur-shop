@@ -23,7 +23,7 @@ export default function IdProduct({}) {
 	const { IdProduct } = router.query;
 	const [data, loader] = useFetch(IdProduct);
 	const { img_slider } = data;
-	console.log(img_slider === undefined ? [] : img_slider);
+	console.log(img_slider === undefined ? [{}] : img_slider);
 	const imggSliderTest = [
 		{
 			url: 'sda',
