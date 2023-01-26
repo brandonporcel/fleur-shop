@@ -9,9 +9,9 @@ import CartContext from '../../context/CartContext';
 import Accordion from '../../components/Accordion';
 import ButtonStyled from '../../components/Button';
 
-// import { Splide, SplideSlide } from '@splidejs/react-splide';
-// import '@splidejs/react-splide/css';
-// import Slider from '../../styles/Slider.Splide.module.css';
+import { Splide, SplideSlide } from '@splidejs/react-splide';
+import '@splidejs/react-splide/css';
+import Slider from '../../styles/Slider.Splide.module.css';
 
 import { capitalizeEachWord, formatPrice } from '../../helpers/helpers';
 
@@ -102,19 +102,19 @@ export default function IdProduct({}) {
 						<div className="detail-ctn">
 							<h3 className="det-prod-title">{data.name} </h3>
 
-							{/* <Splide
+							<Splide
 								aria-labelledby="My Favorite Images"
 								className={Slider.carouselWrapper}
 								options={{
 									arrows: false,
 								}}
 							>
-								{imggSliderTest?.map(({ url, alt }, i) => (
-									<SplideSlide key={i}>
+								{img_slider?.map(({ url, alt }) => (
+									<SplideSlide key={alt}>
 										<img src={url} alt={alt} />
 									</SplideSlide>
 								))}
-							</Splide> */}
+							</Splide>
 							<p className="product-detail-desc">{data.description}</p>
 							<p className="small">
 								{data.stock <= 15 && `*Only ${data.stock} In Stock*`}
