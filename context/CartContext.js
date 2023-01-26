@@ -53,7 +53,7 @@ const CartProvider = ({ children }) => {
 		setCart(JSON.parse(localStorage.getItem('cart')));
 	}, []);
 	useEffect(() => {
-		cart.length > 0 && localStorage.setItem('cart', JSON.stringify(cart));
+		cart?.length > 0 && localStorage.setItem('cart', JSON.stringify(cart));
 	}, [cart]);
 
 	const data = {

@@ -30,7 +30,7 @@ export default function Cart({ visible }) {
 				</div>
 			</header>
 			<div className="cart-products-ctn">
-				{cart.length === 0 ? (
+				{cart?.length === 0 ? (
 					<span className="cart-empty">Your cart is currently empty.</span>
 				) : (
 					cart.map((el) => {
@@ -51,7 +51,7 @@ export default function Cart({ visible }) {
 					})
 				)}
 			</div>
-			{cart.length === 0 ? (
+			{cart?.length === 0 ? (
 				''
 			) : (
 				<footer>
