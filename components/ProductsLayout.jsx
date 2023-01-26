@@ -87,8 +87,8 @@ export default function ProductsLayout({ children, queryy }) {
 						>
 							<div className="product-card__image">
 								<img
-									// src={product.img_slider[0].url}
-									src={product.image}
+									src={product.img_slider[0].url}
+									// src={product.image}
 									alt={product.name}
 									style={{ filter: loading && 'blur(2px)' }}
 								/>

@@ -51,7 +51,7 @@ const CartProvider = ({ children }) => {
 
 	useEffect(() => {
 		let cartt = localStorage.getItem('cart');
-		cartt ? setCart(JSON.parse(cartt)) : setCart([{}]);
+		cartt ? setCart(JSON.parse(cartt)) : setCart([]);
 
 		// setCart(JSON.parse(localStorage.getItem('cart')));
 	}, []);
