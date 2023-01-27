@@ -32,7 +32,7 @@ export default function Header() {
 						className="noBtnStyles header-cart-item"
 						onClick={() => setCartVisible(!cartVisible)}
 					>
-						cart ({cart?.length})
+						cart ({cart.length})
 					</button>
 				</div>
 			</header>

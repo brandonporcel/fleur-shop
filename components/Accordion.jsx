@@ -13,7 +13,7 @@ export default function Accordion({ items }) {
 
 	return (
 		<div className={accordion.container}>
-			{items?.map((item, i) => {
+			{items.map((item, i) => {
 				let isActive = active === item.name;
 				return (
 					<React.Fragment key={i}>

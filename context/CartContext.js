@@ -30,10 +30,12 @@ const CartProvider = ({ children }) => {
 				  )
 				: cart.filter((el) => el.id !== id)
 		);
+		localStorage.setItem('cart', JSON.stringify([]));
 	};
 
 	const deleteAllFromCart = (id) => {
 		setCart(() => cart.filter((el) => el.id !== id));
+		localStorage.setItem('cart', JSON.stringify([]));
 	};
 	const finalPriceCart = () =>
 		cart?.reduce((acc, prod) => acc + prod?.quantity * prod?.price, 0);
@@ -52,8 +54,6 @@ const CartProvider = ({ children }) => {
 	useEffect(() => {
 		let cartt = localStorage.getItem('cart');
 		cartt ? setCart(JSON.parse(cartt)) : setCart([]);
-
-		// setCart(JSON.parse(localStorage.getItem('cart')));
 	}, []);
 	useEffect(() => {
 		cart?.length > 0 && localStorage.setItem('cart', JSON.stringify(cart));

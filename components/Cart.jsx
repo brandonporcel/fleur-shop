@@ -3,7 +3,7 @@ import CartContext from '../context/CartContext';
 import CartProduct from './CartProduct';
 import ButtonStyled from './Button';
 
-import { formatPrice } from '../helpers/helpers';
+import { formatPrice } from '../helpers';
 
 export default function Cart({ visible }) {
 	const {
@@ -30,16 +30,16 @@ export default function Cart({ visible }) {
 				</div>
 			</header>
 			<div className="cart-products-ctn">
-				{cart?.length === 0 ? (
+				{cart.length === 0 ? (
 					<span className="cart-empty">Your cart is currently empty.</span>
 				) : (
-					cart?.map((el) => {
+					cart.map((el) => {
 						return (
 							<CartProduct
 								key={el.id}
 								title={el.name}
 								quantity={el.quantity}
-								// img={el.img_slider[0].url}
+								img={el.img_slider[0].url}
 								id={el.id}
 								stock={el.stock}
 								price={el.price}
@@ -51,7 +51,7 @@ export default function Cart({ visible }) {
 					})
 				)}
 			</div>
-			{cart?.length === 0 ? (
+			{cart.length === 0 ? (
 				''
 			) : (
 				<footer>

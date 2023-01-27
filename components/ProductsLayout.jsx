@@ -34,7 +34,7 @@ export default function ProductsLayout({ children, queryy }) {
 					: dataBase;
 
 				const snapshots = await getDocs(colRef);
-				const docs = snapshots.docs?.map((doc) => {
+				const docs = snapshots.docs.map((doc) => {
 					const data = doc.data();
 					data.id = doc.id;
 					return data;
@@ -78,7 +78,7 @@ export default function ProductsLayout({ children, queryy }) {
 				{loading ? (
 					<Loader />
 				) : (
-					products?.map((product) => (
+					products.map((product) => (
 						<Link
 							href={`/product/${product.id}`}
 							className="product-card-ctn"
@@ -87,8 +87,7 @@ export default function ProductsLayout({ children, queryy }) {
 						>
 							<div className="product-card__image">
 								<img
-									src={product.img_slider[0].url}
-									// src={product.image}
+									src={product.img_slider[0]?.url}
 									alt={product.name}
 									style={{ filter: loading && 'blur(2px)' }}
 								/>
@@ -97,6 +96,16 @@ export default function ProductsLayout({ children, queryy }) {
 							<div className="product-card-icon">
 								<ProductLogo />
 							</div>
+							{product.stock <= 15 ? (
+								<div class="marquee">
+									<div>
+										<span>{`*Only ${product.stock} In Stock*`}</span>
+										<span>{`*Only ${product.stock} In Stock*`}</span>
+									</div>
+								</div>
+							) : (
+								''
+							)}
 						</Link>
 					))
 				)}

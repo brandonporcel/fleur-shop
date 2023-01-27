@@ -13,7 +13,7 @@ import { Splide, SplideSlide } from '@splidejs/react-splide';
 import '@splidejs/react-splide/css';
 import Slider from '../../styles/Slider.Splide.module.css';
 
-import { capitalizeEachWord, formatPrice } from '../../helpers/helpers';
+import { capitalizeEachWord, formatPrice } from '../../helpers';
 
 export default function IdProduct({}) {
 	const { addToCart, setCartVisible, getSpecificProdData, cartVisible } =
@@ -23,15 +23,7 @@ export default function IdProduct({}) {
 	const { IdProduct } = router.query;
 	const [data, loader] = useFetch(IdProduct);
 	const { img_slider } = data;
-	console.log(img_slider === undefined ? [{}] : img_slider);
-	const imggSliderTest = [
-		{
-			url: 'sda',
-		},
-		{
-			url: 'asd',
-		},
-	];
+
 	let accordionItems = [
 		{
 			name: 'DETAILS',
@@ -90,9 +82,9 @@ export default function IdProduct({}) {
 
 	return (
 		<>
-			{/* <Head>
+			<Head>
 				<title>{capitalizeEachWord(data.name)}</title>
-			</Head> */}
+			</Head>
 
 			<main>
 				<div className="detail-wrapper">
@@ -109,8 +101,8 @@ export default function IdProduct({}) {
 									arrows: false,
 								}}
 							>
-								{img_slider?.map(({ url, alt }) => (
-									<SplideSlide key={alt}>
+								{img_slider?.map(({ url, alt }, i) => (
+									<SplideSlide key={i}>
 										<img src={url} alt={alt} />
 									</SplideSlide>
 								))}

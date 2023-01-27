@@ -1,11 +1,11 @@
 import Link from 'next/link';
 import React from 'react';
-import { formatPrice } from '../helpers/helpers';
+import { formatPrice } from '../helpers';
 export default function CartProduct({
 	title,
 	quantity,
 	price,
-	// img,
+	img,
 	stock,
 	addToCart,
 	deleteOneFromCart,
@@ -15,7 +15,7 @@ export default function CartProduct({
 	return (
 		<div className="prod-cart-ctn">
 			<div className="prod-cart-img-ctn">
-				{/* <img src={img} alt={title} /> */}
+				<img src={img} alt={title} />
 			</div>
 			<div className="prod-cart-info-ctn">
 				<Link href={`/product/${id}`}>

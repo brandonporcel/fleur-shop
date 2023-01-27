@@ -1,5 +1,6 @@
 import Head from 'next/head';
 import Newsletter from './Newsletter.jsx';
+
 import Header from './Header';
 import Footer from './Footer';
 import ToTop from '../ToTop';
@@ -25,8 +26,9 @@ export default function Layout({ children }) {
 				/>
 			</Head>
 
-			<Newsletter />
 			<ToTop />
+
+			<Newsletter />
 			<Header />
 
 			{children}

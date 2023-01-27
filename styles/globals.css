@@ -10,10 +10,7 @@ html {
 	padding: 0;
 	box-sizing: border-box;
 }
-:root {
-	/* --bg-color: #1c1c1c; */
-	/* --text-color: #dfddfd; */
-}
+
 body {
 	background-color: var(--bg-color);
 	color: var(--text-color);
@@ -48,7 +45,7 @@ video {
 	cursor: pointer;
 	outline: inherit;
 }
-/*  */
+/* newsletter  */
 .newsletter-wrapper {
 	background: var(--text-color);
 	color: var(--bg-color);
@@ -63,9 +60,8 @@ video {
 	cursor: pointer;
 	text-decoration: underline;
 }
-/*  */
 
-/*  */
+/* header */
 header {
 	display: grid;
 	grid-template-columns: repeat(3, 1fr);
@@ -97,7 +93,7 @@ header {
 .login-btn {
 	text-decoration: none;
 }
-/*  */
+/* carousel home */
 .carousel-wrapper {
 	padding: 0 25px;
 	margin: 25px 0;
@@ -121,7 +117,7 @@ header {
 .carousel-product:first-of-type {
 	padding-left: 0;
 }
-/*  */
+/* footer */
 .footer-page {
 	text-align: center;
 	font-size: 11px;
@@ -211,7 +207,6 @@ footer ul li:hover {
 	transition: border 0.2s ease-in-out;
 }
 /* detailed prod */
-
 .detail-wrapper {
 	width: 50%;
 	margin: 0 auto;
@@ -288,7 +283,7 @@ footer ul li:hover {
 	font-size: 18px;
 }
 .shop-nav-container ul li a:hover {
-	text-decoration: underline;
+	border-bottom: 1px solid var(--text-color);
 }
 /*  */
 .loader {
@@ -307,6 +302,7 @@ footer ul li:hover {
 	}
 }
 /* cart */
+
 .cart-wrapper {
 	position: fixed;
 	transform: translateX(500px);
@@ -481,4 +477,53 @@ footer ul li:hover {
 	font-size: 10px;
 	color: var(--text-color);
 	text-align: left;
+}
+/*  */
+.styled-input {
+	padding: 0.5rem 5px;
+	background-color: var(--bg-color);
+	border: 1px solid var(--text-color);
+	color: var(--text-color);
+	outline: none;
+	margin-right: 5px;
+}
+
+.styled-input::placeholder {
+	color: #aaa;
+}
+/*  */
+.marquee {
+	height: 26px;
+	width: 100%;
+	overflow: hidden;
+	position: absolute;
+	bottom: 0px;
+	background-color: var(--text-color);
+	color: var(--bg-color);
+}
+
+.marquee div {
+	display: block;
+	width: 200%;
+	height: 30px;
+
+	position: absolute;
+	overflow: hidden;
+
+	animation: marquee 2.5s linear infinite;
+}
+
+.marquee span {
+	float: left;
+	width: 50%;
+	font-size: 18px;
+}
+
+@keyframes marquee {
+	0% {
+		left: 0;
+	}
+	100% {
+		left: -100%;
+	}
 }
