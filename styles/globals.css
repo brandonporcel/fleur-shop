@@ -143,6 +143,13 @@ footer ul li:hover {
 .products-wrapper {
 	width: 70%;
 	margin: 0 auto;
+	text-align: center;
+}
+.products-header-nav {
+	display: flex;
+	justify-content: space-between;
+	padding: 5px 0;
+	margin-bottom: 10px;
 }
 .products-ctnn {
 	display: grid;
@@ -156,12 +163,13 @@ footer ul li:hover {
 	position: relative;
 	width: 290px;
 	margin-bottom: 30px;
-	/* margin-bottom: 10px; */
+
 	opacity: 0;
 	filter: blur(5px);
 	transform: translateX(-100%);
 	transition: opacity 1.5s, transform 1.5s, filter 1s;
 }
+
 .product-card__image {
 	overflow: hidden;
 	height: 100%;

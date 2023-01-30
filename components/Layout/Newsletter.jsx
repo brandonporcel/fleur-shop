@@ -52,7 +52,6 @@ export default function Newsletter() {
 								required
 								onChange={() => setChecked(!checked)}
 								id="term"
-								defaultChecked={checked}
 								checked={checked}
 							/>
 							<small className="small">accept terms and conditions</small>
