@@ -21,7 +21,7 @@ export default function ProductsLayout({ children, queryy }) {
 	return (
 		<section className="products-wrapper">
 			<nav className="products-header-nav">
-				<div>
+				<div className="products-header-btn-actions-ctn">
 					<ButtonStyled onClick={mostRecentsProds}>Most Recent</ButtonStyled>
 					<ButtonStyled onClick={() => sortByPrice('mayor')}>
 						Highest Price

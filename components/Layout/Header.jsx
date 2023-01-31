@@ -11,6 +11,7 @@ export default function Header() {
 	const [shopNav, setShopNav] = useState(false);
 	const { session, money } = useContext(GoogleUserContext);
 	const { cart, cartVisible, setCartVisible } = useContext(CartContext);
+
 	return (
 		<>
 			<header>
@@ -34,7 +35,7 @@ export default function Header() {
 								href={'/login'}
 								className="header-nav-item login-btn"
 							>
-								out
+								👋
 							</Link>
 						</div>
 					) : (

@@ -3,15 +3,27 @@ import React, { useEffect, useRef } from 'react';
 
 export default function CarouselHome() {
 	const Container = useRef(null);
+
 	const scroll = (e) => {
 		e.deltaY > 0
 			? (Container.current.scrollLeft += 50)
 			: (Container.current.scrollLeft -= 50);
 	};
+
+	// useEffect(() => {
+	// 	console.log('hgolaaas', window.matchMedia('min-width:700px'));
+	// }, []);
+
 	useEffect(() => {
-		Container.current.addEventListener('wheel', (e) => e.preventDefault(), {
-			passive: false,
-		});
+		Container.current.addEventListener(
+			'wheel',
+			(e) => {
+				e.preventDefault();
+			},
+			{
+				passive: false,
+			}
+		);
 	}, []);
 
 	const images = [
