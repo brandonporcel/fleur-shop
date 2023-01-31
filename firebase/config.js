@@ -1,7 +1,7 @@
 import { initializeApp } from 'firebase/app';
 import { getFirestore } from 'firebase/firestore';
 const firebaseConfig = {
-	apiKey: 'AIzaSyBrPd4IgPXOp0gNm7_peyB8vNETFR9SZWM',
+	apiKey: process.env.FIREBASE_API_KEY,
 	authDomain: 'fleur-shop.firebaseapp.com',
 	projectId: 'fleur-shop',
 	storageBucket: 'fleur-shop.appspot.com',

@@ -7,6 +7,11 @@ const CartProvider = ({ children }) => {
 	const [cartVisible, setCartVisible] = useState(false);
 	const { money, setMoney, session } = useContext(GoogleUserContext);
 
+	const getQuantityFromProd = (id) => {
+		const prod = cart.find((prod) => prod.id === id);
+		return prod === undefined ? 0 : prod.quantity;
+	};
+
 	const addToCart = (newProduct) => {
 		const itemInCart = cart.some((prod) => prod.id === newProduct.id);
 		setCart(() => {
@@ -17,30 +22,26 @@ const CartProvider = ({ children }) => {
 				: [...cart, { ...newProduct, quantity: 1 }];
 		});
 	};
-
+	// subtract one item
 	const deleteOneFromCart = (id) => {
-		const productToDelete = cart.find((el) => el.id === id);
+		const productToDelete = cart.some((el) => el.id === id);
 		setCart(() =>
 			productToDelete.quantity > 1
 				? cart?.map((el) =>
-						el.id === id
-							? {
-									...el,
-									quantity: el.quantity - 1,
-							  }
-							: el
+						el.id === id ? { ...el, quantity: el.quantity - 1 } : el
 				  )
 				: cart.filter((el) => el.id !== id)
 		);
-		localStorage.setItem('cart', JSON.stringify([]));
 	};
-
+	// delete one selected product
 	const deleteAllFromCart = (id) => {
 		setCart(() => cart.filter((el) => el.id !== id));
 		localStorage.setItem('cart', JSON.stringify([]));
 	};
+
 	const finalPriceCart = () =>
 		cart?.reduce((acc, prod) => acc + prod?.quantity * prod?.price, 0);
+
 	const buyProducts = () => {
 		if (session) {
 			money < finalPriceCart() && alert('You have no enough money :(');
@@ -54,11 +55,7 @@ const CartProvider = ({ children }) => {
 		localStorage.setItem('cart', JSON.stringify([]));
 	};
 
-	const getSpecificProdData = (id) => {
-		const prod = cart.find((prod) => prod.id === id);
-		return prod === undefined ? 0 : prod.quantity;
-	};
-
+	// local storage
 	useEffect(() => {
 		let cartt = localStorage.getItem('cart');
 		cartt ? setCart(JSON.parse(cartt)) : setCart([]);
@@ -76,7 +73,7 @@ const CartProvider = ({ children }) => {
 		buyProducts,
 		setCartVisible,
 		finalPriceCart,
-		getSpecificProdData,
+		getQuantityFromProd,
 	};
 
 	return <CartContext.Provider value={data}>{children}</CartContext.Provider>;

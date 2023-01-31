@@ -14,27 +14,33 @@ const ProductsContext = createContext();
 
 const ProductsProvider = ({ children }) => {
 	const [loading, setLoading] = useState(false);
+
 	const router = useRouter();
+	// collection=> collection/{tops}
 	const { collection } = router.query;
-
-	const [products, setProducts] = useState([]);
-
-	const productRef = useRef();
-	const [productsObserver, setProductsObserver] = useState(null);
+	// urlSection=> /shop
 	const [urlSection, setUrlSection] = useState(true);
 
-	const [counterPagination, setCounterPagination] = useState(1);
+	// oberser effect
+	const productRef = useRef();
+	const [productsObserver, setProductsObserver] = useState(null);
 
+	const [products, setProducts] = useState([]);
+	// copy of first call api results order
+	const [mostRecent, setMostRecent] = useState([]);
+	// 6 products to show
 	const [dobleProductsForPagination, setDobleProductsForPagination] = useState(
 		[]
 	);
-	const [mostRecent, setMostRecent] = useState([]);
+
+	// searcher hook
 	const { results, search, searchBarProps } = useItemsSearch(
 		dobleProductsForPagination
 	);
 
+	// pagination
+	const [counterPagination, setCounterPagination] = useState(1);
 	let itempsPerPage = 6;
-	// 18 items. 17 lenght
 	let maxIndex = Math.ceil(products.length / itempsPerPage);
 
 	const nextPage = () => {
@@ -65,21 +71,13 @@ const ProductsProvider = ({ children }) => {
 		);
 	};
 
-	useEffect(() => {
-		setProductsObserver(document.querySelectorAll('.product-card-ctn'));
-	}, [search]);
-	useEffect(() => {
-		setProductsObserver(document.querySelectorAll('.product-card-ctn'));
-	}, [router.query, dobleProductsForPagination]);
-
 	const mostRecentsProds = () => {
 		setDobleProductsForPagination([...mostRecent].slice(0, 6));
 		setCounterPagination(1);
 	};
 
 	const sortByPrice = (type) => {
-		const mayor = products.sort((a, b) => {
-			// return;
+		const newOrder = products.sort((a, b) => {
 			switch (type) {
 				case 'mayor':
 					if (a.price > b.price) return -1;
@@ -96,15 +94,14 @@ const ProductsProvider = ({ children }) => {
 		});
 		setCounterPagination(1);
 
-		setDobleProductsForPagination([...mayor].slice(0, 6));
+		setDobleProductsForPagination([...newOrder].slice(0, 6));
 	};
 
-	// calling api
+	// calling api for /collections & /shop,,,, detailed page [product] has other similar call function
 	useEffect(() => {
 		if (!router.isReady) return;
 		collection == undefined ? setUrlSection(false) : setUrlSection(true);
 		setLoading(true);
-
 		(async () => {
 			try {
 				const dataBase = colecctionnn(db, 'products');
@@ -125,19 +122,9 @@ const ProductsProvider = ({ children }) => {
 				setMostRecent([...docs]);
 			} catch (error) {
 				console.log(error);
-			} finally {
-				setTimeout(() => {
-					setProductsObserver(document.querySelectorAll('.product-card-ctn'));
-				}, 300);
 			}
 		})();
-	}, [router.isReady, collection, urlSection]);
-	useEffect(() => {
-		// const productsFromApi = products?.map((prod) => prod);
-		// setDobleProductsForPagination(
-		// 	[...productsFromApi].splice(0, itempsPerPage)
-		// );
-	}, [router.isReady, collection, urlSection]);
+	}, [collection, urlSection]);
 
 	// observer effect
 	useEffect(() => {
@@ -160,6 +147,10 @@ const ProductsProvider = ({ children }) => {
 			});
 		}
 	}, [productsObserver]);
+	// get effect again when those values changes
+	useEffect(() => {
+		setProductsObserver(document.querySelectorAll('.product-card-ctn'));
+	}, [router.query, dobleProductsForPagination, search]);
 
 	const data = {
 		loading,

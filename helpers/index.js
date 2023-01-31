@@ -12,5 +12,11 @@ const capitalizeEachWord = (sentence) => {
 	const str2 = typeof sentence === 'string' && arr.join(' ');
 	return str2;
 };
+const getRandomEmoji = () => {
+	const string =
+		'😳😨🤔🏃‍♂️💸😴😬🥰🚬😭💋🥺🤓🛐😈❤🌸💐🤭🌼🥰☠💩🧜‍♀️🧚‍♀️🧚‍♂️🧎‍♀️👨‍🦯🛌🤝🙏🍆🍌🍊🍐👙🎀🎀🎀';
+	const emojis = string.split(/.*?/u);
 
-export { formatPrice, capitalizeEachWord };
+	return emojis[~~(Math.random() * emojis.length)];
+};
+export { formatPrice, capitalizeEachWord, getRandomEmoji };

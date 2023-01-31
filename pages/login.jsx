@@ -14,9 +14,7 @@ const login = () => {
 		<div style={{ textAlign: 'CENTER' }}>
 			{session ? (
 				<>
-					<p style={{ fontSize: 18, fontWeight: 500 }}>
-						Chau {session.user.name}
-					</p>
+					<p style={{ fontSize: 18, fontWeight: 500 }}>{session.user.name}</p>
 					<div>
 						<img
 							src={session.user.image}

@@ -16,7 +16,7 @@ import Slider from '../../styles/Slider.Splide.module.css';
 import { capitalizeEachWord, formatPrice } from '../../helpers';
 
 export default function IdProduct({}) {
-	const { addToCart, setCartVisible, getSpecificProdData, cartVisible } =
+	const { addToCart, setCartVisible, getQuantityFromProd } =
 		useContext(CartContext);
 
 	const router = useRouter();
@@ -114,7 +114,7 @@ export default function IdProduct({}) {
 							<Accordion items={accordionItems}></Accordion>
 							<h4 className="detail-price">{formatPrice(data.price)}</h4>
 
-							{data.stock > getSpecificProdData(data.id) ? (
+							{data.stock > getQuantityFromProd(data.id) ? (
 								<ButtonStyled type="bg" onClick={addToCartYOpenCart}>
 									Add To Cart
 								</ButtonStyled>

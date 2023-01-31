@@ -1,129 +1,9 @@
-// import { useRouter } from 'next/router';
-// import React, { useEffect, useRef, useState } from 'react';
-// import Loader from './Loader';
-// import db from '../firebase/config.js';
-// import {
-// 	query,
-// 	where,
-// 	collection as colecctionnn,
-// 	getDocs,
-// } from 'firebase/firestore';
-// import ProductLogo from './ProductLogo';
-// import Link from 'next/link';
-
-// export default function ProductsLayout({ children, queryy }) {
-// 	const [loading, setLoading] = useState(false);
-
-// 	const router = useRouter();
-// 	const { collection } = router.query;
-
-// 	const [products, setProducts] = useState([]);
-
-// 	const productRef = useRef();
-// 	const [productsObserver, setProductsObserver] = useState(null);
-
-// 	// calling api
-// 	useEffect(() => {
-// 		if (!router.isReady) return;
-// 		setLoading(true);
-// 		(async () => {
-// 			try {
-// 				const dataBase = colecctionnn(db, 'products');
-// 				const colRef = queryy
-// 					? query(dataBase, where('section', '==', collection))
-// 					: dataBase;
-
-// 				const snapshots = await getDocs(colRef);
-// 				const docs = snapshots.docs.map((doc) => {
-// 					const data = doc.data();
-// 					data.id = doc.id;
-// 					return data;
-// 				});
-// 				setProducts(docs);
-// 				setLoading(false);
-// 			} catch (error) {
-// 				console.log(error);
-// 			} finally {
-// 				setTimeout(() => {
-// 					setProductsObserver(document.querySelectorAll('.product-card-ctn'));
-// 				}, 300);
-// 			}
-// 		})();
-// 	}, [router.isReady, collection]);
-
-// 	// observer effect
-// 	useEffect(() => {
-// 		if (productsObserver !== null) {
-// 			const options = {
-// 				threshold: 0.15,
-// 			};
-// 			const detectIntersection = (entries) => {
-// 				entries.forEach((el) => {
-// 					if (el.isIntersecting) {
-// 						el.target.classList.add('showIntersecting');
-// 					} else if (el.target.classList.contains('showIntersecting')) {
-// 						el.target.classList.remove('showIntersecting');
-// 					}
-// 				});
-// 			};
-// 			const observer = new IntersectionObserver(detectIntersection, options);
-// 			productsObserver.forEach((el) => {
-// 				observer.observe(el);
-// 			});
-// 		}
-// 	}, [productsObserver]);
-// 	return (
-// 		<section className="products-wrapper">
-// 			<div className="products-ctnn">
-// 				{loading ? (
-// 					<Loader />
-// 				) : (
-// 					products.map((product) => (
-// 						<Link
-// 							href={`/product/${product.id}`}
-// 							className="product-card-ctn"
-// 							key={product.id}
-// 							ref={productRef}
-// 						>
-// 							<div className="product-card__image">
-// 								<img
-// 									src={product.img_slider[0]?.url}
-// 									alt={product.name}
-// 									style={{ filter: loading && 'blur(2px)' }}
-// 								/>
-// 							</div>
-// 							<h3 className="product-card-title">{product.name}</h3>
-// 							<div className="product-card-icon">
-// 								<ProductLogo />
-// 							</div>
-// 							{product.stock <= 15 ? (
-// 								<div className="marquee">
-// 									<div>
-// 										<span>{`*Only ${product.stock} In Stock*`}</span>
-// 										<span>{`*Only ${product.stock} In Stock*`}</span>
-// 									</div>
-// 								</div>
-// 							) : (
-// 								''
-// 							)}
-// 						</Link>
-// 					))
-// 				)}
-// 			</div>
-// 			{children}
-// 		</section>
-// 	);
-// }
-
 import Loader from './Loader';
-
-import ProductLogo from './ProductLogo';
-import Link from 'next/link';
 import ProductsContext from '../context/Products.Context';
 import { useContext, useState } from 'react';
 import ButtonStyled from './Button';
-// import { ButtonStyled } from './Button';
-
+import ProductPreview from './ProductPreview';
+import { getRandomEmoji } from '../helpers';
 export default function ProductsLayout({ children, queryy }) {
 	const {
 		loading,
@@ -137,13 +17,6 @@ export default function ProductsLayout({ children, queryy }) {
 		results,
 		searchBarProps,
 	} = useContext(ProductsContext);
-	const getRandomEmoji = () => {
-		const string =
-			'😳😨🤔🏃‍♂️💸😴😬🥰🚬😭💋🥺🤓🛐😈❤🌸💐🤭🌼🥰☠💩🧜‍♀️🧚‍♀️🧚‍♂️🧎‍♀️👨‍🦯🛌🤝🙏🍆🍌🍊🍐👙🎀🎀🎀';
-		const emojis = string.split(/.*?/u);
-
-		return emojis[~~(Math.random() * emojis.length)];
-	};
 
 	return (
 		<section className="products-wrapper">
@@ -171,50 +44,24 @@ export default function ProductsLayout({ children, queryy }) {
 				{loading ? (
 					<Loader />
 				) : results.length === 0 ? (
-					<>
-						<p>
-							No results found <br /> {getRandomEmoji()}
-						</p>
-					</>
+					<p>
+						No results found <br /> {getRandomEmoji()}
+					</p>
 				) : (
-					results.map((product) => (
-						<Link
-							href={`/product/${product.id}`}
-							className="product-card-ctn"
-							key={product.id}
-							ref={productRef}
-						>
-							<div className="product-card__image">
-								<img
-									src={product.img_slider[0]?.url}
-									alt={product.name}
-									style={{ filter: loading && 'blur(2px)' }}
-								/>
-							</div>
-							<h3 className="product-card-title">{product.name}</h3>
-							<div className="product-card-icon">
-								<ProductLogo />
-							</div>
-							{product.stock <= 15 ? (
-								<div className="marquee">
-									<div>
-										<span>{`*Only ${product.stock} In Stock*`}</span>
-										<span>{`*Only ${product.stock} In Stock*`}</span>
-									</div>
-								</div>
-							) : (
-								''
-							)}
-						</Link>
+					results.map((prod) => (
+						<ProductPreview
+							key={prod.id}
+							id={prod.id}
+							img_slider={prod.img_slider}
+							name={prod.name}
+							loading={loading}
+							stock={prod.stock}
+							productRef={productRef}
+						></ProductPreview>
 					))
 				)}
 			</div>
-
-			{loading ? (
-				''
-			) : maxIndex === 1 ? (
-				''
-			) : results.length === 0 ? (
+			{loading || results.length === 0 || maxIndex === 1 ? (
 				''
 			) : (
 				<>
