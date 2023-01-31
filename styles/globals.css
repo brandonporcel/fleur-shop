@@ -610,6 +610,12 @@ footer ul li:hover {
 	.products-wrapper {
 		width: 90%;
 	}
+	.products-header-btn-actions-ctn {
+		margin-bottom: 10px;
+	}
+	.header-nav-item.login-btn {
+		margin: 0;
+	}
 }
 @media only screen and (min-width: 676px) and (max-width: 768px) {
 }

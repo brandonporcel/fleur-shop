@@ -10,10 +10,6 @@ export default function CarouselHome() {
 			: (Container.current.scrollLeft -= 50);
 	};
 
-	// useEffect(() => {
-	// 	console.log('hgolaaas', window.matchMedia('min-width:700px'));
-	// }, []);
-
 	useEffect(() => {
 		Container.current.addEventListener(
 			'wheel',
