@@ -8,6 +8,7 @@ import {
 	getDocs,
 } from 'firebase/firestore';
 import { useRouter } from 'next/router.js';
+import { useItemsSearch } from '../hooks/useItemsSearch.js';
 
 const ProductsContext = createContext();
 
@@ -28,7 +29,12 @@ const ProductsProvider = ({ children }) => {
 		[]
 	);
 	const [mostRecent, setMostRecent] = useState([]);
+	const { results, search, searchBarProps } = useItemsSearch(
+		dobleProductsForPagination
+	);
+
 	let itempsPerPage = 6;
+	// 18 items. 17 lenght
 	let maxIndex = Math.ceil(products.length / itempsPerPage);
 
 	const nextPage = () => {
@@ -44,7 +50,6 @@ const ProductsProvider = ({ children }) => {
 			[...products].splice(index, itempsPerPage)
 		);
 	};
-	// 18 items. 17 lenght
 	const prevPage = () => {
 		counterPagination === -1
 			? setCounterPagination(maxIndex)
@@ -62,25 +67,13 @@ const ProductsProvider = ({ children }) => {
 
 	useEffect(() => {
 		setProductsObserver(document.querySelectorAll('.product-card-ctn'));
-	}, [router.query]);
-
+	}, [search]);
 	useEffect(() => {
 		setProductsObserver(document.querySelectorAll('.product-card-ctn'));
-	}, [dobleProductsForPagination]);
+	}, [router.query, dobleProductsForPagination]);
 
 	const mostRecentsProds = () => {
-		// setProducts(mostRecent);
 		setDobleProductsForPagination([...mostRecent].slice(0, 6));
-		console.log(
-			'mostRecent',
-			mostRecent,
-			'[...mostRecent]',
-			[...mostRecent],
-			'dobleProductsForPagination',
-			dobleProductsForPagination,
-			'products',
-			products
-		);
 		setCounterPagination(1);
 	};
 
@@ -104,12 +97,6 @@ const ProductsProvider = ({ children }) => {
 		setCounterPagination(1);
 
 		setDobleProductsForPagination([...mayor].slice(0, 6));
-		console.log(
-			'sortByPrice',
-			products,
-			'dobleProductsForPagination',
-			dobleProductsForPagination
-		);
 	};
 
 	// calling api
@@ -173,6 +160,7 @@ const ProductsProvider = ({ children }) => {
 			});
 		}
 	}, [productsObserver]);
+
 	const data = {
 		loading,
 		products,
@@ -184,6 +172,8 @@ const ProductsProvider = ({ children }) => {
 		prevPage,
 		sortByPrice,
 		mostRecentsProds,
+		results,
+		searchBarProps,
 	};
 	return (
 		<ProductsContext.Provider value={data}>{children}</ProductsContext.Provider>

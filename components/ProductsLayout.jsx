@@ -123,9 +123,9 @@ import ProductsContext from '../context/Products.Context';
 import { useContext, useState } from 'react';
 import ButtonStyled from './Button';
 // import { ButtonStyled } from './Button';
+
 export default function ProductsLayout({ children, queryy }) {
 	const {
-		dobleProductsForPagination,
 		loading,
 		productRef,
 		nextPage,
@@ -134,7 +134,17 @@ export default function ProductsLayout({ children, queryy }) {
 		maxIndex,
 		sortByPrice,
 		mostRecentsProds,
+		results,
+		searchBarProps,
 	} = useContext(ProductsContext);
+	const getRandomEmoji = () => {
+		const string =
+			'😳😨🤔🏃‍♂️💸😴😬🥰🚬😭💋🥺🤓🛐😈❤🌸💐🤭🌼🥰☠💩🧜‍♀️🧚‍♀️🧚‍♂️🧎‍♀️👨‍🦯🛌🤝🙏🍆🍌🍊🍐👙🎀🎀🎀';
+		const emojis = string.split(/.*?/u);
+
+		return emojis[~~(Math.random() * emojis.length)];
+	};
+
 	return (
 		<section className="products-wrapper">
 			<nav className="products-header-nav">
@@ -149,17 +159,25 @@ export default function ProductsLayout({ children, queryy }) {
 				</div>
 				<div>
 					<input
-						type="text"
+						type="search"
 						className="styled-input"
 						placeholder="Search Product"
+						{...searchBarProps}
 					/>
 				</div>
 			</nav>
+
 			<div className="products-ctnn">
 				{loading ? (
 					<Loader />
+				) : results.length === 0 ? (
+					<>
+						<p>
+							No results found <br /> {getRandomEmoji()}
+						</p>
+					</>
 				) : (
-					dobleProductsForPagination.map((product) => (
+					results.map((product) => (
 						<Link
 							href={`/product/${product.id}`}
 							className="product-card-ctn"
@@ -195,6 +213,8 @@ export default function ProductsLayout({ children, queryy }) {
 			{loading ? (
 				''
 			) : maxIndex === 1 ? (
+				''
+			) : results.length === 0 ? (
 				''
 			) : (
 				<>

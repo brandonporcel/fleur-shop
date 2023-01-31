@@ -1,9 +1,11 @@
-import { createContext, useEffect, useState } from 'react';
+import { createContext, useContext, useEffect, useState } from 'react';
+import GoogleUserContext from './GoogleUser.Context';
 const CartContext = createContext();
 
 const CartProvider = ({ children }) => {
 	const [cart, setCart] = useState([]);
 	const [cartVisible, setCartVisible] = useState(false);
+	const { money, setMoney, session } = useContext(GoogleUserContext);
 
 	const addToCart = (newProduct) => {
 		const itemInCart = cart.some((prod) => prod.id === newProduct.id);
@@ -40,9 +42,15 @@ const CartProvider = ({ children }) => {
 	const finalPriceCart = () =>
 		cart?.reduce((acc, prod) => acc + prod?.quantity * prod?.price, 0);
 	const buyProducts = () => {
-		alert('Thanks for your order!!');
-		setCartVisible(false);
+		if (session) {
+			money < finalPriceCart() && alert('You have no enough money :(');
+			alert(`Great purchase ${session.user.name}!. Arrives in 7 business days`);
+			setMoney(money - finalPriceCart());
+		} else {
+			alert('Thanks for your order☺!!');
+		}
 		setCart([]);
+		setCartVisible(false);
 		localStorage.setItem('cart', JSON.stringify([]));
 	};
 

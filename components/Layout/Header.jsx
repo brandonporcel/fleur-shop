@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import React, { useContext, useState } from 'react';
 import CartContext from '../../context/CartContext';
+import GoogleUserContext from '../../context/GoogleUser.Context';
 import Cart from '../Cart';
 import Logo from '../icons/Logo';
 import ShopNav from '../shopNav';
@@ -8,7 +9,7 @@ import ThemeSwitcher from '../ThemeSwitcher';
 
 export default function Header() {
 	const [shopNav, setShopNav] = useState(false);
-
+	const { session, money } = useContext(GoogleUserContext);
 	const { cart, cartVisible, setCartVisible } = useContext(CartContext);
 	return (
 		<>
@@ -25,9 +26,23 @@ export default function Header() {
 					</Link>
 				</div>
 				<div className="nav-ctn right">
-					<Link href={'/login'} className="header-nav-item login-btn">
-						Login
-					</Link>
+					{session ? (
+						<div>
+							💸{money}
+							<Link
+								style={{ marginLeft: 10 }}
+								href={'/login'}
+								className="header-nav-item login-btn"
+							>
+								out
+							</Link>
+						</div>
+					) : (
+						<Link href={'/login'} className="header-nav-item login-btn">
+							Login
+						</Link>
+					)}
+
 					<button
 						className="noBtnStyles header-cart-item"
 						onClick={() => setCartVisible(!cartVisible)}
