@@ -1,6 +1,6 @@
 ## fleur shop
 
-recreacion de la tienda virtual [golf le fleur](https://golflefleur.com/)
+recreacion de la tienda virtual golf le fleur
 
 ### Sobre
 La pagina es un eCommerce desarrollado con Next JS para reforzar y aplicar nuevos conocimientos. Se implementó FireStore para la base de datos y React Router para las rutas.
