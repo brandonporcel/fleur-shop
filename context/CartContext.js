@@ -24,7 +24,8 @@ const CartProvider = ({ children }) => {
 	};
 	// subtract one item
 	const deleteOneFromCart = (id) => {
-		const productToDelete = cart.some((el) => el.id === id);
+		const productToDelete = cart.find((el) => el.id === id);
+		console.log(id, productToDelete);
 		setCart(() =>
 			productToDelete.quantity > 1
 				? cart?.map((el) =>

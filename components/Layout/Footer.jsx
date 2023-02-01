@@ -16,7 +16,14 @@ export default function Footer() {
 				<br />
 				ALL RIGHTS RESERVED
 				<br />
-				<small>page made just to practice my skills</small>
+				<small className="small">
+					<a
+						href="https://github.com/brandonporcel/fleur-shop/"
+						target={'_blank'}
+					>
+						https://github.com/brandonporcel/fleur-shop/
+					</a>
+				</small>
 			</div>
 		</footer>
 	);
