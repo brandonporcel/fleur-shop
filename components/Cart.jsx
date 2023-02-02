@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import CartContext from '../context/CartContext';
 import CartProduct from './CartProduct';
 import ButtonStyled from './Button';
@@ -16,6 +16,14 @@ export default function Cart({ visible }) {
 		cartVisible,
 		finalPriceCart,
 	} = useContext(CartContext);
+	useEffect(() => {
+		cartVisible &&
+			document.addEventListener('keydown', (event) => {
+				if (event.key === 'Escape') {
+					setCartVisible(false);
+				}
+			});
+	}, [cartVisible]);
 
 	return (
 		<div

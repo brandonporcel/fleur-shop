@@ -2,7 +2,10 @@ import { useMemo, useState } from 'react';
 
 export const useItemsSearch = (items) => {
 	const [search, setSearch] = useState('');
-	const lowercaseSearch = useMemo(() => search.toLocaleLowerCase(), [search]);
+	const lowercaseSearch = useMemo(
+		() => search.toLocaleLowerCase().trim(),
+		[search]
+	);
 	const results = useMemo(
 		() =>
 			items.filter(({ name }) =>

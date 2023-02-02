@@ -34,6 +34,7 @@ export default function Header() {
 								style={{ marginLeft: 10 }}
 								href={'/login'}
 								className="header-nav-item login-btn"
+								title={'Log Out'}
 							>
 								👋
 							</Link>

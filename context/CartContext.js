@@ -25,7 +25,7 @@ const CartProvider = ({ children }) => {
 	// subtract one item
 	const deleteOneFromCart = (id) => {
 		const productToDelete = cart.find((el) => el.id === id);
-		console.log(id, productToDelete);
+
 		setCart(() =>
 			productToDelete.quantity > 1
 				? cart?.map((el) =>
@@ -33,6 +33,7 @@ const CartProvider = ({ children }) => {
 				  )
 				: cart.filter((el) => el.id !== id)
 		);
+		localStorage.setItem('cart', JSON.stringify([]));
 	};
 	// delete one selected product
 	const deleteAllFromCart = (id) => {
